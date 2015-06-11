@@ -6,7 +6,7 @@
 
 #include "global.h"
 
-class OI_LIB_EXPORT LinearAlgebra
+class OI_MATH_EXPORT LinearAlgebra
 {
 public:
     virtual ~LinearAlgebra(){}

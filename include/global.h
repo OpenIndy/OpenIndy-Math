@@ -4,9 +4,9 @@
 #include <QtCore/QtGlobal>
 
 #if defined(OI_MATH_LIB)
-#  define OI_LIB_EXPORT Q_DECL_EXPORT
+#  define OI_MATH_EXPORT Q_DECL_EXPORT
 #else
-#  define OI_LIB_EXPORT Q_DECL_IMPORT
+#  define OI_MATH_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // GLOBAL_H

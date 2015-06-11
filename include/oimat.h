@@ -15,7 +15,7 @@ using namespace std;
  * \brief The Rotation struct
  * Struct that represents a rotation around one of the three coordinate axes
  */
-struct OI_LIB_EXPORT Rotation{
+struct OI_MATH_EXPORT Rotation{
 
     enum RotationAxis{
         X_AXIS,
@@ -36,7 +36,7 @@ struct OI_LIB_EXPORT Rotation{
 /*!
  * \brief The RotationChain class
  */
-class OI_LIB_EXPORT RotationChain{
+class OI_MATH_EXPORT RotationChain{
 
 public:
     void clear(){ this->myRotations.clear(); }
@@ -52,7 +52,7 @@ private:
 /*!
  * \brief The OiMat class
  */
-class OI_LIB_EXPORT OiMat
+class OI_MATH_EXPORT OiMat
 {
 public:
     OiMat();

@@ -5,7 +5,7 @@
 #include "oivec.h"
 #include "oimat.h"
 
-class OI_LIB_EXPORT ChooseLALib
+class OI_MATH_EXPORT ChooseLALib
 {
 public:
 

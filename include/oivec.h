@@ -13,7 +13,7 @@ class OiMat;
 
 using namespace std;
 
-class OI_LIB_EXPORT OiVec
+class OI_MATH_EXPORT OiVec
 {
 public:
     OiVec();

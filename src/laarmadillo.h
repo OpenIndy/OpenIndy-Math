@@ -10,7 +10,7 @@
 
 #include "global.h"
 
-class OI_LIB_EXPORT LAArmadillo : public LinearAlgebra
+class OI_MATH_EXPORT LAArmadillo : public LinearAlgebra
 {
 public:
     LAArmadillo();
