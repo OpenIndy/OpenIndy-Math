@@ -1,5 +1,7 @@
 #include "laarmadillo.h"
 
+using namespace oi::math;
+
 LAArmadillo::LAArmadillo()
 {
 }

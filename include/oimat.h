@@ -6,8 +6,18 @@
 
 #include "global.h"
 
+namespace oi{
+namespace math{
+
 class LinearAlgebra;
 class OiVec;
+
+struct Rotation;
+class RotationChain;
+class OiMat;
+
+}
+}
 
 using namespace std;
 
@@ -15,7 +25,7 @@ using namespace std;
  * \brief The Rotation struct
  * Struct that represents a rotation around one of the three coordinate axes
  */
-struct OI_MATH_EXPORT Rotation{
+struct OI_MATH_EXPORT oi::math::Rotation{
 
     enum RotationAxis{
         X_AXIS,
@@ -36,7 +46,7 @@ struct OI_MATH_EXPORT Rotation{
 /*!
  * \brief The RotationChain class
  */
-class OI_MATH_EXPORT RotationChain{
+class OI_MATH_EXPORT oi::math::RotationChain{
 
 public:
     void clear(){ this->myRotations.clear(); }
@@ -52,7 +62,7 @@ private:
 /*!
  * \brief The OiMat class
  */
-class OI_MATH_EXPORT OiMat
+class OI_MATH_EXPORT oi::math::OiMat
 {
 public:
     OiMat();

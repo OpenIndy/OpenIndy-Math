@@ -6,7 +6,18 @@
 
 #include "global.h"
 
-class OI_MATH_EXPORT LinearAlgebra
+namespace oi{
+namespace math{
+
+class LinearAlgebra;
+
+}
+}
+
+/*!
+ * \brief The LinearAlgebra class
+ */
+class OI_MATH_EXPORT oi::math::LinearAlgebra
 {
 public:
     virtual ~LinearAlgebra(){}

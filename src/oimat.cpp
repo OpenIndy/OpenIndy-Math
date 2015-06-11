@@ -3,6 +3,8 @@
 #include "oivec.h"
 #include "linearalgebra.h"
 
+using namespace oi::math;
+
 LinearAlgebra* OiMat::myLinearAlgebra = NULL;
 
 OiMat::OiMat(){

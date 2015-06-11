@@ -8,12 +8,23 @@
 
 #include "global.h"
 
+namespace oi{
+namespace math{
+
 class LinearAlgebra;
 class OiMat;
 
+class OiVec;
+
+}
+}
+
 using namespace std;
 
-class OI_MATH_EXPORT OiVec
+/*!
+ * \brief The OiVec class
+ */
+class OI_MATH_EXPORT oi::math::OiVec
 {
 public:
     OiVec();

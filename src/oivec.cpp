@@ -3,6 +3,8 @@
 #include "oimat.h"
 #include "linearalgebra.h"
 
+using namespace oi::math;
+
 LinearAlgebra* OiVec::myLinearAlgebra = NULL;
 
 OiVec::OiVec()

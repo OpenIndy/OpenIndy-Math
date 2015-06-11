@@ -10,7 +10,19 @@
 
 #include "global.h"
 
-class OI_MATH_EXPORT LAArmadillo : public LinearAlgebra
+namespace oi{
+namespace math{
+
+class LAArmadillo;
+
+}
+}
+
+/*!
+ * \brief The LAArmadillo class
+ * LinearAlgebra implementation using the armadillo library
+ */
+class OI_MATH_EXPORT oi::math::LAArmadillo : public oi::math::LinearAlgebra
 {
 public:
     LAArmadillo();

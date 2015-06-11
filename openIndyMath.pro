@@ -28,12 +28,10 @@ INCLUDEPATH += $$PWD/include
 
 SOURCES += src/oivec.cpp \
     src/oimat.cpp \
-    src/linearalgebra.cpp \
     src/laarmadillo.cpp \
     src/chooselalib.cpp
 
 HEADERS  += include/global.h \
-    src/types.h \
     include/oivec.h \
     include/oimat.h \
     include/linearalgebra.h \

@@ -2,6 +2,8 @@
 
 #include "laarmadillo.h"
 
+using namespace oi::math;
+
 /*!
  * \brief ChooseLALib::setLinearAlgebra
  * Decide which linear algebra library to use

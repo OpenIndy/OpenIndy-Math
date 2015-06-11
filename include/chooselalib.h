@@ -5,7 +5,18 @@
 #include "oivec.h"
 #include "oimat.h"
 
-class OI_MATH_EXPORT ChooseLALib
+namespace oi{
+namespace math{
+
+class ChooseLALib;
+
+}
+}
+
+/*!
+ * \brief The ChooseLALib class
+ */
+class OI_MATH_EXPORT oi::math::ChooseLALib
 {
 public:
 
