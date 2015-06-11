@@ -7,11 +7,21 @@
 *.la
 *.lai
 *.so
-# *.dll
+*.dll
 *.dylib
 
 *.bak
 *.pdb
+
+# exceptions
+!blas_win32_MT.dll
+!blas_win32_MT.lib
+!lapack_win32_MT.dll
+!lapack_win32_MT.lib
+!blas_win64_MT.dll
+!blas_win64_MT.lib
+!lapack_win64_MT.dll
+!lapack_win64_MT.lib
 
 # directories
 bin/
