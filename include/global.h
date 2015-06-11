@@ -3,7 +3,7 @@
 
 #include <QtCore/QtGlobal>
 
-#if defined(OI_LIB)
+#if defined(OI_MATH_LIB)
 #  define OI_LIB_EXPORT Q_DECL_EXPORT
 #else
 #  define OI_LIB_EXPORT Q_DECL_IMPORT

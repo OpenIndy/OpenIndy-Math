@@ -4,14 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core sql
+QT       += core
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4):
 
-TARGET = openIndyLib
+TARGET = openIndyMath
 TEMPLATE = lib
 
-DEFINES += OI_LIB
+DEFINES += OI_MATH_LIB
 
 CONFIG(debug, debug|release) {
     DESTDIR = $$PWD/bin/debug
@@ -39,7 +39,7 @@ HEADERS  += include/global.h \
     include/linearalgebra.h \
     include/chooselalib.h \
     src/laarmadillo.h \
-    ../armadillo-3.910.0/include/armadillo \
+    lib/armadillo-3.910.0/include/armadillo
 
 
 #----------------------------Specific Includes for linux---------------------------------
@@ -66,30 +66,30 @@ win32 {
 
         ## Windows x86 (32bit) specific build here
 
-LIBS += -L$$PWD/../armadillo-3.910.0/examples/lib_win32/ -lblas_win32_MT
+LIBS += -L$$PWD/lib/armadillo-3.910.0/examples/lib_win32/ -lblas_win32_MT
 
-INCLUDEPATH += $$PWD/../armadillo-3.910.0/examples/lib_win32
-DEPENDPATH += $$PWD/../armadillo-3.910.0/examples/lib_win32
+INCLUDEPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win32
+DEPENDPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win32
 
-LIBS += -L$$PWD/../armadillo-3.910.0/examples/lib_win32/ -llapack_win32_MT
+LIBS += -L$$PWD/lib/armadillo-3.910.0/examples/lib_win32/ -llapack_win32_MT
 
-INCLUDEPATH += $$PWD/../armadillo-3.910.0/examples/lib_win32
-DEPENDPATH += $$PWD/../armadillo-3.910.0/examples/lib_win32
+INCLUDEPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win32
+DEPENDPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win32
 
     } else {
         message("x86_64 build")
 
-LIBS += -L$$PWD/../armadillo-3.910.0/examples/lib_win64/ -lblas_win64_MT
+LIBS += -L$$PWD/lib/armadillo-3.910.0/examples/lib_win64/ -lblas_win64_MT
 
-INCLUDEPATH += $$PWD/../armadillo-3.910.0/examples/lib_win64
-DEPENDPATH += $$PWD/../armadillo-3.910.0/examples/lib_win64
+INCLUDEPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win64
+DEPENDPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win64
 
-LIBS += -L$$PWD/../armadillo-3.910.0/examples/lib_win64/ -llapack_win64_MT
+LIBS += -L$$PWD/lib/armadillo-3.910.0/examples/lib_win64/ -llapack_win64_MT
 
-INCLUDEPATH += $$PWD/../armadillo-3.910.0/examples/lib_win64
-DEPENDPATH += $$PWD/../armadillo-3.910.0/examples/lib_win64
+INCLUDEPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win64
+DEPENDPATH += $$PWD/lib/armadillo-3.910.0/examples/lib_win64
 
     }
 }
 
-INCLUDEPATH += $$PWD/../armadillo-3.910.0/include
+INCLUDEPATH += $$PWD/lib/armadillo-3.910.0/include
