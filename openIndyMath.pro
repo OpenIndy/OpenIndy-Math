@@ -13,11 +13,17 @@ TEMPLATE = lib
 
 DEFINES += OI_MATH_LIB
 
-GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
-GIT_VERSION = $$replace(GIT_VERSION, "-g"{1}\w*, )
-GIT_VERSION = $$replace(GIT_VERSION, "-", ".")
+GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags) # get git version
+GIT_VERSION = $$replace(GIT_VERSION, "-g"{1}\w*, ) # remove commit hash after tag name
+GIT_VERSION = $$replace(GIT_VERSION, "-", ".") # remove remaining hyphen
+GIT_VERSION = $$replace(GIT_VERSION, "\b[0-9a-f]{5,40}\b", ) # remove commit hash (only if no tag has been set yet)
 
-VERSION = $$GIT_VERSION
+isEmpty(GIT_VERSION){
+    message("no version")
+}else{
+    message($$GIT_VERSION)
+    VERSION = $$GIT_VERSION
+}
 
 CONFIG(debug, debug|release) {
     DESTDIR = $$PWD/bin/debug
