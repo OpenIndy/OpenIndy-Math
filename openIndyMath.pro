@@ -13,6 +13,11 @@ TEMPLATE = lib
 
 DEFINES += OI_MATH_LIB
 
+GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+
+message($$GIT_VERSION)
+VERSION = $$GIT_VERSION
+
 CONFIG(debug, debug|release) {
     DESTDIR = $$PWD/bin/debug
 } else {
