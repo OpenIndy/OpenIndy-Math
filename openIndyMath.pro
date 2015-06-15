@@ -14,8 +14,9 @@ TEMPLATE = lib
 DEFINES += OI_MATH_LIB
 
 GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+GIT_VERSION = $$replace(GIT_VERSION, "-g"{1}\w*, )
+GIT_VERSION = $$replace(GIT_VERSION, "-", ".")
 
-message($$GIT_VERSION)
 VERSION = $$GIT_VERSION
 
 CONFIG(debug, debug|release) {
