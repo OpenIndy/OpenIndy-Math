@@ -8,15 +8,10 @@
 namespace oi{
 namespace math{
 
-class ChooseLALib;
-
-}
-}
-
 /*!
  * \brief The ChooseLALib class
  */
-class OI_MATH_EXPORT oi::math::ChooseLALib
+class OI_MATH_EXPORT ChooseLALib
 {
 public:
 
@@ -27,5 +22,8 @@ public:
     static void setLinearAlgebra(LinearAlgebraLibrary lib);
 
 };
+
+}
+}
 
 #endif // CHOOSELALIB_H

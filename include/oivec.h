@@ -14,17 +14,12 @@ namespace math{
 class LinearAlgebra;
 class OiMat;
 
-class OiVec;
-
-}
-}
-
 using namespace std;
 
 /*!
  * \brief The OiVec class
  */
-class OI_MATH_EXPORT oi::math::OiVec
+class OI_MATH_EXPORT OiVec
 {
 public:
     OiVec();
@@ -74,5 +69,8 @@ private:
     static OiVec mult(const double &value, const OiVec &v);
 
 };
+
+}
+}
 
 #endif // OIVEC_H

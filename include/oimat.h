@@ -12,20 +12,13 @@ namespace math{
 class LinearAlgebra;
 class OiVec;
 
-struct Rotation;
-class RotationChain;
-class OiMat;
-
-}
-}
-
 using namespace std;
 
 /*!
  * \brief The Rotation struct
  * Struct that represents a rotation around one of the three coordinate axes
  */
-struct OI_MATH_EXPORT oi::math::Rotation{
+struct OI_MATH_EXPORT Rotation{
 
     enum RotationAxis{
         X_AXIS,
@@ -46,7 +39,7 @@ struct OI_MATH_EXPORT oi::math::Rotation{
 /*!
  * \brief The RotationChain class
  */
-class OI_MATH_EXPORT oi::math::RotationChain{
+class OI_MATH_EXPORT RotationChain{
 
 public:
     void clear(){ this->myRotations.clear(); }
@@ -62,7 +55,7 @@ private:
 /*!
  * \brief The OiMat class
  */
-class OI_MATH_EXPORT oi::math::OiMat
+class OI_MATH_EXPORT OiMat
 {
 public:
     OiMat();
@@ -125,5 +118,8 @@ private:
     static void mult(OiMat &result, const double &value, const OiMat &m);
 
 };
+
+}
+}
 
 #endif // OIMAT_H

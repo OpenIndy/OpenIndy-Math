@@ -9,15 +9,10 @@
 namespace oi{
 namespace math{
 
-class LinearAlgebra;
-
-}
-}
-
 /*!
  * \brief The LinearAlgebra class
  */
-class OI_MATH_EXPORT oi::math::LinearAlgebra
+class OI_MATH_EXPORT LinearAlgebra
 {
 public:
     virtual ~LinearAlgebra(){}
@@ -169,5 +164,8 @@ public:
     virtual bool solve(OiMat &X, const OiMat &A, const OiMat &B) = 0;
 
 };
+
+}
+}
 
 #endif // LINEARALGEBRA_H

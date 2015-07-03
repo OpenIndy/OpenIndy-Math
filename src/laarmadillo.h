@@ -13,16 +13,11 @@
 namespace oi{
 namespace math{
 
-class LAArmadillo;
-
-}
-}
-
 /*!
  * \brief The LAArmadillo class
  * LinearAlgebra implementation using the armadillo library
  */
-class OI_MATH_EXPORT oi::math::LAArmadillo : public oi::math::LinearAlgebra
+class OI_MATH_EXPORT LAArmadillo : public LinearAlgebra
 {
 public:
     LAArmadillo();
@@ -52,5 +47,8 @@ private:
     void arma2OiMat(OiMat &result, const arma::mat &m);
 
 };
+
+}
+}
 
 #endif // LAARMADILLO_H
