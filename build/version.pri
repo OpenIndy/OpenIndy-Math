@@ -1,6 +1,6 @@
 
 # get git version
-GIT_VERSION = $$system(git --git-dir $$PWD/../.git --work-tree $$PWD describe --always --tags)
+GIT_VERSION = $$system(git --git-dir "$$PWD/../.git" --work-tree "$$PWD" describe --always --tags)
 
 # remove commit hash after tag name
 GIT_VERSION = $$replace(GIT_VERSION, "-g"{1}\w*, )
