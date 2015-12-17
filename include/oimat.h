@@ -15,44 +15,6 @@ class OiVec;
 using namespace std;
 
 /*!
- * \brief The Rotation struct
- * Struct that represents a rotation around one of the three coordinate axes
- */
-struct OI_MATH_EXPORT Rotation{
-
-    enum RotationAxis{
-        X_AXIS,
-        Y_AXIS,
-        Z_AXIS
-    };
-
-    Rotation(double angle, RotationAxis axis){
-        this->angle = angle;
-        this->axis = axis;
-    }
-
-    RotationAxis axis;
-    double angle;
-
-};
-
-/*!
- * \brief The RotationChain class
- */
-class OI_MATH_EXPORT RotationChain{
-
-public:
-    void clear(){ this->myRotations.clear(); }
-    void appendRotation(Rotation r){ this->myRotations.push_back(r); }
-    int getRotationCount(){ return this->myRotations.size(); }
-    Rotation getRotationAt(int index){ return this->myRotations.at(index); }
-
-private:
-    vector<Rotation> myRotations;
-
-};
-
-/*!
  * \brief The OiMat class
  */
 class OI_MATH_EXPORT OiMat
@@ -110,9 +72,12 @@ public:
     static bool solve(OiVec &x, const OiMat &A, const OiVec &b);
     static bool solve(OiMat &X, const OiMat &A, const OiMat &B);
 
-    static OiMat getRotationMatrix(double angle, OiVec axis);
-    static OiMat getRotationMatrix(double angle, Rotation::RotationAxis axis);
-    static OiMat getRotationMatrix(RotationChain rotationChain);
+    static OiMat getRotationMatrix(const double &angle, const OiVec &axis);
+    static OiMat getRotationMatrix(const OiVec &q);
+    static OiMat getRotationMatrix(const double &rx, const double &ry, const double &rz);
+
+    static OiVec getRotationAngles(const OiMat &r);
+    static OiVec getQuaternion(const OiMat &r);
 
 private:
     static void mult(OiMat &result, const double &value, const OiMat &m);

@@ -253,6 +253,47 @@ void OiVec::dot(double &result, const OiVec &a, const OiVec &b){
 }
 
 /*!
+ * \brief OiVec::concatenateRotations
+ * Concatenate two rotations defined by the quaternions q1 and q2
+ * \param q
+ * \param q1
+ * \param q2
+ */
+void OiVec::concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2){
+
+    if(q.getSize() == 0){
+        for(int i = 0; i < 4; i++){
+            q.add(0.0);
+        }
+    }
+
+    if(q.getSize() != 4 || q1.getSize() != 4 || q2.getSize() != 4){
+        throw logic_error("Cannot concatenate two quaternion-rotations of incompatible size");
+    }
+
+    OiVec a(3), b(3);
+    a.setAt(0, q1.getAt(1));
+    a.setAt(1, q1.getAt(2));
+    a.setAt(2, q1.getAt(3));
+    b.setAt(0, q2.getAt(1));
+    b.setAt(1, q2.getAt(2));
+    b.setAt(2, q2.getAt(3));
+
+    OiVec n;
+    double s;
+    OiVec::dot(s, a, b);
+    OiVec::cross(n, a, b);
+
+    n = n + q1.getAt(0) * b + q2.getAt(0) * a;
+
+    q.setAt(0, q1.getAt(0) * q2.getAt(0));
+    q.setAt(1, n.getAt(0));
+    q.setAt(2, n.getAt(1));
+    q.setAt(3, n.getAt(2));
+
+}
+
+/*!
  * \brief OiVec::mult
  * Multiply the vector by a scalar
  * \param value

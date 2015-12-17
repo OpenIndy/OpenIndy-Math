@@ -65,6 +65,8 @@ public:
     static void cross(OiVec &result, const OiVec &a, const OiVec &b);
     static void dot(double &result, const OiVec &a, const OiVec &b);
 
+    static void concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2);
+
 private:
     static OiVec mult(const double &value, const OiVec &v);
 

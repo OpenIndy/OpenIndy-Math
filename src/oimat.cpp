@@ -442,14 +442,15 @@ bool OiMat::solve(OiMat &X, const OiMat &A, const OiMat &B){
  * \param axis
  * \return
  */
-OiMat OiMat::getRotationMatrix(double angle, OiVec axis){
+OiMat OiMat::getRotationMatrix(const double &angle, const OiVec &axis){
     if(axis.getSize() == 3){
         OiMat result(3, 3);
 
-        axis.normalize();
+        OiVec axisN = axis;
+        axisN.normalize();
 
         double w = qCos(angle / 2.0);
-        OiVec x = qSin(angle / 2.0) * axis;
+        OiVec x = qSin(angle / 2.0) * axisN;
 
         result.setAt(0, 0, 1.0 - 2.0 * (x.getAt(1)*x.getAt(1) + x.getAt(2)*x.getAt(2)));
         result.setAt(0, 1, 2.0 * (x.getAt(0)*x.getAt(1) - w * x.getAt(2)));
@@ -470,34 +471,127 @@ OiMat OiMat::getRotationMatrix(double angle, OiVec axis){
 
 /*!
  * \brief OiMat::getRotationMatrix
- * Get the rotation matrix corresponding to a rotation around the X, Y or Z axis by the given amount
- * \param angle
- * \param axis
+ * \param q
  * \return
  */
-OiMat OiMat::getRotationMatrix(double angle, Rotation::RotationAxis axis){
-    OiVec myAxis(3);
-    switch(axis){
-    case Rotation::X_AXIS:
-        myAxis.setAt(0, 1.0);
-        break;
-    case Rotation::Y_AXIS:
-        myAxis.setAt(1, 1.0);
-        break;
-    case Rotation::Z_AXIS:
-        myAxis.setAt(2, 1.0);
-        break;
+OiMat OiMat::getRotationMatrix(const OiVec &q){
+
+    //check quaternion
+    if(q.getSize() != 4){
+        return OiMat();
     }
 
-    return OiMat::getRotationMatrix(angle, myAxis);
+    //build rotation matrix
+    OiMat r(3,3);
+
+    r.setAt(0, 0, 1.0 - 2.0 * (q.getAt(2)*q.getAt(2) + q.getAt(3)*q.getAt(3)));
+    r.setAt(0, 1, 2.0 * (q.getAt(1)*q.getAt(2) - q.getAt(0) * q.getAt(3)));
+    r.setAt(0, 2, 2.0 * (q.getAt(1)*q.getAt(3) + q.getAt(0) * q.getAt(2)));
+    r.setAt(1, 0, 2.0 * (q.getAt(1)*q.getAt(2) + q.getAt(0) * q.getAt(3)));
+    r.setAt(1, 1, 1.0 - 2.0 * (q.getAt(1)*q.getAt(1) + q.getAt(3)*q.getAt(3)));
+    r.setAt(1, 2, 2.0 * (q.getAt(2)*q.getAt(3) - q.getAt(0) * q.getAt(1)));
+    r.setAt(2, 0, 2.0 * (q.getAt(1)*q.getAt(3) - q.getAt(0) * q.getAt(2)));
+    r.setAt(2, 1, 2.0 * (q.getAt(2)*q.getAt(3) + q.getAt(0) * q.getAt(1)));
+    r.setAt(2, 2, 1.0 - 2.0 * (q.getAt(1)*q.getAt(1) + q.getAt(2)*q.getAt(2)));
+
+    /*r.setAt(0, 0, q.getAt(0)*q.getAt(0) + q.getAt(1)*q.getAt(1) - q.getAt(2)*q.getAt(2) - q.getAt(3)*q.getAt(3));
+    r.setAt(0, 1, 2*(q.getAt(1)*q.getAt(2) - q.getAt(0)*q.getAt(3)));
+    r.setAt(0, 2, 2*(q.getAt(1)*q.getAt(3) + q.getAt(0)*q.getAt(2)));
+    r.setAt(1, 0, 2*(q.getAt(1)*q.getAt(2) + q.getAt(0)*q.getAt(3)));
+    r.setAt(1, 1, q.getAt(0)*q.getAt(0) - q.getAt(1)*q.getAt(1) + q.getAt(2)*q.getAt(2) - q.getAt(3)*q.getAt(3));
+    r.setAt(1, 2, 2*(q.getAt(2)*q.getAt(3) - q.getAt(0)*q.getAt(1)));
+    r.setAt(2, 0, 2*(q.getAt(3)*q.getAt(1) - q.getAt(0)*q.getAt(2)));
+    r.setAt(2, 1, 2*(q.getAt(3)*q.getAt(2) + q.getAt(0)*q.getAt(1)));
+    r.setAt(2, 2, q.getAt(0)*q.getAt(0) - q.getAt(1)*q.getAt(1) - q.getAt(2)*q.getAt(2) + q.getAt(3)*q.getAt(3));*/
+
+    return r;
+
 }
 
 /*!
  * \brief OiMat::getRotationMatrix
- * Get the rotation matrix corresponding to the given chain of rotations around X, Y or Z axes
- * \param rotationChain
+ * \param rx
+ * \param ry
+ * \param rz
  * \return
  */
-OiMat OiMat::getRotationMatrix(RotationChain rotationChain){
-    return OiMat();
+OiMat OiMat::getRotationMatrix(const double &rx, const double &ry, const double &rz){
+
+    OiMat r(3,3);
+    r.setAt(0, 0, cos(ry)*cos(rz));
+    r.setAt(0, 1, cos(rx)*sin(rz)+sin(rx)*sin(ry)*cos(rz));
+    r.setAt(0, 2, sin(rx)*sin(rz)-cos(rx)*sin(ry)*cos(rz));
+    r.setAt(1, 0, -cos(ry)*sin(rz));
+    r.setAt(1, 1, cos(rx)*cos(rz)-sin(rx)*sin(ry)*sin(rz));
+    r.setAt(1, 2, sin(rx)*cos(rz)+cos(rx)*sin(ry)*sin(rz));
+    r.setAt(2, 0, sin(ry));
+    r.setAt(2, 1, -sin(rx)*cos(ry));
+    r.setAt(2, 2, cos(rx)*cos(ry));
+
+    return r;
+
+}
+
+/*!
+ * \brief OiMat::getRotationAngles
+ * \param r
+ * \return
+ */
+OiVec OiMat::getRotationAngles(const OiMat &r){
+
+    //check matrix
+    if(r.getRowCount() != 3 || r.getRowCount() != r.getColCount()){
+        return OiVec();
+    }
+
+    OiVec angles(3);
+    angles.setAt(0, atan2(-r.getAt(2,1), r.getAt(2,2))); //rx
+    angles.setAt(1, asin(r.getAt(2,0))); //ry
+    angles.setAt(2, atan2(-r.getAt(1,0), r.getAt(0,0))); //rz
+    if( abs(cos(angles.getAt(1)) * cos(angles.getAt(2))) - abs(r.getAt(0,0)) > 0.01 ){
+        angles.setAt(1, 3.141592653589793 - angles.getAt(1));
+    }
+
+    return angles;
+
+}
+
+/*!
+ * \brief OiMat::getQuaternion
+ * \param r
+ * \return
+ */
+OiVec OiMat::getQuaternion(const OiMat &r){
+
+    if(r.getColCount() != 3 || r.getRowCount() != 3){
+        return OiVec();
+    }
+
+    OiVec r0(3);
+    r0.setAt(0, 1.0);
+
+    OiVec r1 = r * r0;
+
+    OiVec axis(3);
+    double angle;
+
+    OiVec::cross(axis, r0, r1);
+    axis.normalize();
+
+    r0.normalize();
+    r1.normalize();
+    OiVec::dot(angle, r0, r1);
+    angle = acos(angle);
+
+    OiVec q(4);
+
+    OiVec x = qSin(angle / 2.0) * axis;
+
+    q.setAt(0, qCos(angle / 2.0));
+    q.setAt(1, x.getAt(0));
+    q.setAt(2, x.getAt(1));
+    q.setAt(3, x.getAt(2));
+
+    return q;
+
 }
