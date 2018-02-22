@@ -494,14 +494,17 @@ OiMat OiMat::getRotationMatrix(const OiVec &q){
     r.setAt(2, 1, 2.0 * (q.getAt(2)*q.getAt(3) + q.getAt(0) * q.getAt(1)));
     r.setAt(2, 2, 1.0 - 2.0 * (q.getAt(1)*q.getAt(1) + q.getAt(2)*q.getAt(2)));
 
+
+
+
     /*r.setAt(0, 0, q.getAt(0)*q.getAt(0) + q.getAt(1)*q.getAt(1) - q.getAt(2)*q.getAt(2) - q.getAt(3)*q.getAt(3));
-    r.setAt(0, 1, 2*(q.getAt(1)*q.getAt(2) - q.getAt(0)*q.getAt(3)));
-    r.setAt(0, 2, 2*(q.getAt(1)*q.getAt(3) + q.getAt(0)*q.getAt(2)));
-    r.setAt(1, 0, 2*(q.getAt(1)*q.getAt(2) + q.getAt(0)*q.getAt(3)));
+    r.setAt(0, 1, 2.0*(q.getAt(1)*q.getAt(2) - q.getAt(0)*q.getAt(3)));
+    r.setAt(0, 2, 2.0*(q.getAt(1)*q.getAt(3) + q.getAt(0)*q.getAt(2)));
+    r.setAt(1, 0, 2.0*(q.getAt(1)*q.getAt(2) + q.getAt(0)*q.getAt(3)));
     r.setAt(1, 1, q.getAt(0)*q.getAt(0) - q.getAt(1)*q.getAt(1) + q.getAt(2)*q.getAt(2) - q.getAt(3)*q.getAt(3));
-    r.setAt(1, 2, 2*(q.getAt(2)*q.getAt(3) - q.getAt(0)*q.getAt(1)));
-    r.setAt(2, 0, 2*(q.getAt(3)*q.getAt(1) - q.getAt(0)*q.getAt(2)));
-    r.setAt(2, 1, 2*(q.getAt(3)*q.getAt(2) + q.getAt(0)*q.getAt(1)));
+    r.setAt(1, 2, 2.0*(q.getAt(2)*q.getAt(3) - q.getAt(0)*q.getAt(1)));
+    r.setAt(2, 0, 2.0*(q.getAt(3)*q.getAt(1) - q.getAt(0)*q.getAt(2)));
+    r.setAt(2, 1, 2.0*(q.getAt(3)*q.getAt(2) + q.getAt(0)*q.getAt(1)));
     r.setAt(2, 2, q.getAt(0)*q.getAt(0) - q.getAt(1)*q.getAt(1) - q.getAt(2)*q.getAt(2) + q.getAt(3)*q.getAt(3));*/
 
     return r;
@@ -571,6 +574,7 @@ OiVec OiMat::getQuaternion(const OiMat &r){
     r0.setAt(0, 1.0);
 
     OiVec r1 = r * r0;
+    r1.normalize();
 
     OiVec axis(3);
     double angle;
@@ -578,8 +582,8 @@ OiVec OiMat::getQuaternion(const OiMat &r){
     OiVec::cross(axis, r0, r1);
     axis.normalize();
 
-    r0.normalize();
-    r1.normalize();
+    //r0.normalize();
+    //r1.normalize();
     OiVec::dot(angle, r0, r1);
     angle = acos(angle);
 
