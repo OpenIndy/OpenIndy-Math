@@ -569,33 +569,67 @@ OiVec OiMat::getQuaternion(const OiMat &r){
     if(r.getColCount() != 3 || r.getRowCount() != 3){
         return OiVec();
     }
+    OiVec rotAngles = getRotationAngles(r);
+    OiVec quat = getQuaternion(rotAngles.getAt(0), rotAngles.getAt(1), rotAngles.getAt(2));
+    return quat;
+}
 
-    OiVec r0(3);
-    r0.setAt(0, 1.0);
+/*!
+ * \brief OiMat::getQuaternion
+ * \param rx
+ * \param ry
+ * \param rz
+ * \return
+ */
+OiVec OiMat::getQuaternion(const double &rx, const double &ry, const double &rz)
+{
+    oi::math::OiMat rotMat = oi::math::OiMat::getRotationMatrix(rx, ry, rz);
 
-    OiVec r1 = r * r0;
-    r1.normalize();
+    double factor;
+    double factor2;
+    if((rotMat.getAt(0,0)+rotMat.getAt(1,1)+rotMat.getAt(2,2)) > 0){
+        factor = 1.0;
+    }else if((rotMat.getAt(0,0) > rotMat.getAt(1,1)) && (rotMat.getAt(0,0) > rotMat.getAt(2,2))){
+        factor = 2.0;
+    }else if(rotMat.getAt(1,1) > rotMat.getAt(2,2)){
+        factor = 3;
+    }else{
+        factor = 4;
+    }
 
-    OiVec axis(3);
-    double angle;
+    if(factor == 1){
+        factor2 = 2* sqrt(1+rotMat.getAt(0,0) + rotMat.getAt(1,1) + rotMat.getAt(2,2));
+    }else if(factor == 2){
+        factor2 = 2* sqrt(1 + rotMat.getAt(0,0) - rotMat.getAt(1,1) - rotMat.getAt(2,2));
+    }else if(factor == 3){
+        factor2 =  2* sqrt(1+rotMat.getAt(1,1) - rotMat.getAt(0,0) - rotMat.getAt(2,2));
+    }else if(factor ==4){
+        factor2 = 2* sqrt(1+ rotMat.getAt(2,2) - rotMat.getAt(0,0) - rotMat.getAt(1,1));
+    }
 
-    OiVec::cross(axis, r0, r1);
-    axis.normalize();
+    oi::math::OiVec quatVec;
 
-    //r0.normalize();
-    //r1.normalize();
-    OiVec::dot(angle, r0, r1);
-    angle = acos(angle);
+    if(factor == 1){
+        quatVec.add(0.25*factor2);
+        quatVec.add((rotMat.getAt(2,1)-rotMat.getAt(1,2))/factor2);
+        quatVec.add((rotMat.getAt(0,2)-rotMat.getAt(2,0))/factor2);
+        quatVec.add((rotMat.getAt(1,0)-rotMat.getAt(0,1))/factor2);
+    }else if(factor == 2){
+        quatVec.add((rotMat.getAt(2,1)-rotMat.getAt(1,2))/factor2);
+        quatVec.add(0.25*factor2);
+        quatVec.add((rotMat.getAt(0,1)+rotMat.getAt(1,0))/factor2);
+        quatVec.add((rotMat.getAt(0,2)+rotMat.getAt(2,0))/factor2);
+    }else if(factor == 3){
+        quatVec.add((rotMat.getAt(0,2)-rotMat.getAt(2,0))/factor2);
+        quatVec.add((rotMat.getAt(0,1)+rotMat.getAt(1,0))/factor2);
+        quatVec.add(0.25*factor2);
+        quatVec.add((rotMat.getAt(1,2)+rotMat.getAt(2,1))/factor2);
+    }else if(factor == 4){
+        quatVec.add((rotMat.getAt(1,0)-rotMat.getAt(0,1))/factor2);
+        quatVec.add((rotMat.getAt(0,2)+rotMat.getAt(2,0))/factor2);
+        quatVec.add((rotMat.getAt(1,2)+rotMat.getAt(2,1))/factor2);
+        quatVec.add(0.25*factor2);
+    }
 
-    OiVec q(4);
-
-    OiVec x = qSin(angle / 2.0) * axis;
-
-    q.setAt(0, qCos(angle / 2.0));
-    q.setAt(1, x.getAt(0));
-    q.setAt(2, x.getAt(1));
-    q.setAt(3, x.getAt(2));
-
-    return q;
-
+    return quatVec;
 }
