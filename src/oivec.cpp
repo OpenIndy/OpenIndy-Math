@@ -261,6 +261,10 @@ void OiVec::dot(double &result, const OiVec &a, const OiVec &b){
  */
 void OiVec::concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2){
 
+    //rotate by q2 and afterwards by q1
+    //q = q2 * q1 == R = R1 * R2
+    //q = [w, vx, vy, vz]
+
     if(q.getSize() == 0){
         for(int i = 0; i < 4; i++){
             q.add(0.0);
@@ -284,13 +288,12 @@ void OiVec::concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2){
     OiVec::dot(s, a, b);
     OiVec::cross(n, a, b);
 
-    n = n + q1.getAt(0) * b + q2.getAt(0) * a;
+    OiVec qv = n + q1.getAt(0) * b + q2.getAt(0) * a;
 
-    q.setAt(0, q1.getAt(0) * q2.getAt(0));
-    q.setAt(1, n.getAt(0));
-    q.setAt(2, n.getAt(1));
-    q.setAt(3, n.getAt(2));
-
+    q.setAt(0, q1.getAt(0) * q2.getAt(0) - s);
+    q.setAt(1, qv.getAt(0));
+    q.setAt(2, qv.getAt(1));
+    q.setAt(3, qv.getAt(2));
 }
 
 /*!
