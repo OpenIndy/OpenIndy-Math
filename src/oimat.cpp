@@ -585,12 +585,12 @@ OiVec OiMat::getQuaternion(const double &rx, const double &ry, const double &rz)
 {
     oi::math::OiMat rotMat = oi::math::OiMat::getRotationMatrix(rx, ry, rz);
 
-    double factor;
+    int factor;
     double factor2;
     if((rotMat.getAt(0,0)+rotMat.getAt(1,1)+rotMat.getAt(2,2)) > 0){
-        factor = 1.0;
+        factor = 1;
     }else if((rotMat.getAt(0,0) > rotMat.getAt(1,1)) && (rotMat.getAt(0,0) > rotMat.getAt(2,2))){
-        factor = 2.0;
+        factor = 2;
     }else if(rotMat.getAt(1,1) > rotMat.getAt(2,2)){
         factor = 3;
     }else{
