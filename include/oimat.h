@@ -78,6 +78,7 @@ public:
 
     static OiVec getRotationAngles(const OiMat &r);
     static OiVec getQuaternion(const OiMat &r);
+    static OiVec getQuaternion(const double &rx, const double &ry, const double &rz);
 
 private:
     static void mult(OiMat &result, const double &value, const OiMat &m);
