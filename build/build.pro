@@ -22,10 +22,7 @@ include($$PWD/config.pri)
 # external libraries
 include($$PWD/dependencies.pri)
 
-# include paths
-INCLUDEPATH += $$PWD/..
-INCLUDEPATH += $$PWD/../src
-INCLUDEPATH += $$PWD/../include
+include($$PWD/defaults.pri)
 
 # source files
 SOURCES += $$PWD/../src/oivec.cpp \
