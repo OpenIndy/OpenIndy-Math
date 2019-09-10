@@ -1,27 +1,34 @@
 
-# include paths
-INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/include
 
-# header files
-HEADERS  += $$PWD/../lib/armadillo-3.910.0/include/armadillo
 
 #----------------------------Specific Includes for linux---------------------------------
 
 linux {
-    LIBS += -L/usr/local/lib -lblas
-    LIBS += -L/usr/local/lib -llapack
+    # include paths
+    #INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/include
+
+    # header files
+   # HEADERS  += $$PWD/../lib/armadillo-3.910.0/include/armadillo
+
+    #LIBS += -L/usr/lib -lblas
+    #LIBS += -L/usr/lib -llapack
+    LIBS += -L/usr/lib -larmadillo
 }
 
 #----------------------------Specific Includes for mac os---------------------------------
 
 #/Library/Frameworks
-mac: LIBS +=  -framework Accelerate
+#mac: LIBS +=  -framework Accelerate
 #mac: LIBS += -llapack -lblas
 
 #----------------------------Specific Includes for windows---------------------------------
 
 win32 {
+    # include paths
+    INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/include
 
+    # header files
+    HEADERS  += $$PWD/../lib/armadillo-3.910.0/include/armadillo
     !contains(QMAKE_HOST.arch, x86_64) {
 
         message("x86 build")
