@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <stdexcept>
+#include <QFile>
 
 #include "global.h"
 
@@ -80,6 +81,7 @@ public:
     static OiVec getQuaternion(const OiMat &r);
     static OiVec getQuaternion(const double &rx, const double &ry, const double &rz);
 
+    void writeTo(QString filename);
 private:
     static void mult(OiMat &result, const double &value, const OiMat &m);
 

@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QtCore/QtMath>
+#include <QFile>
 #include <vector>
 #include <stdexcept>
 
@@ -67,6 +68,7 @@ public:
 
     static void concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2);
 
+    void writeTo(QString filename);
 private:
     static OiVec mult(const double &value, const OiVec &v);
 
