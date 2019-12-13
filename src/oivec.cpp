@@ -308,3 +308,14 @@ OiVec OiVec::mult(const double &value, const OiVec &v){
     OiVec::myLinearAlgebra->multiply(result, value, v);
     return result;
 }
+
+void OiVec::writeTo(QString filename) {
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
+    QTextStream stream(&file);
+    for(int row=0; row<this->getSize(); row++){
+        stream << QString::number(this->getAt(row), 'f', 10);
+        stream << endl;
+    }
+    file.close();
+}
