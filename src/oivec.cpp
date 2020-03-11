@@ -319,3 +319,9 @@ void OiVec::writeTo(QString filename) {
     }
     file.close();
 }
+
+double OiVec::length() {
+    double dot = 0.0;
+    OiVec::dot(dot, *this, *this);
+    return qSqrt(dot);
+}
