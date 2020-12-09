@@ -82,6 +82,9 @@ public:
     static void concatenateRotations(OiVec &q, const OiVec &q1, const OiVec &q2);
 
     void writeTo(QString filename);
+
+    double length();
+
 private:
     static OiVec mult(const double &value, const OiVec &v);
 
