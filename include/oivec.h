@@ -58,6 +58,19 @@ public:
     friend OiVec operator/(const OiVec &v, const double value){
         return OiVec::mult((1.0 / value), v);
     }
+    friend bool operator==(const OiVec &v1, const OiVec &v2) {
+        if(v1.getSize() != v2.getSize()) {
+            return false;
+        }
+
+        for(int i=0; i<v1.getSize(); i++) {
+            if(v1.getAt(i) != v2.getAt(i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     void normalize();
 
