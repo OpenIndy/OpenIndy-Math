@@ -64,3 +64,10 @@ DEPENDPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64
     }
 
 }
+
+CONFIG(release, debug|release) {
+    dlltarget.path = $$PWD/../install/release
+} else {
+    dlltarget.path = $$PWD/../install/debug
+}
+INSTALLS += dlltarget
