@@ -38,3 +38,5 @@ Makefile
 *.Release
 
 build/*_resource.rc
+
+install
