@@ -7,3 +7,6 @@ SUBDIRS = \
 
 # project locations
 math.subdir = $$PWD/build
+
+QMAKE_EXTRA_TARGETS += run-test
+run-test.commands = rem
