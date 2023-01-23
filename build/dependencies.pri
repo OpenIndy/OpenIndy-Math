@@ -102,3 +102,21 @@ linux {
     INSTALLS += librarytarget
 }
 
+
+# blas / lapack
+win32 {
+
+    win32:CONFIG(release, debug|release): blaslapack.path = $$PWD/../install/release
+    win32:CONFIG(debug, debug|release): blaslapack.path = $$PWD/../install/debug
+
+    !contains(QT_ARCH, x86_64) {
+        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/blas_win32_MT.dll
+        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/lapack_win32_MT.dll
+    } else {
+        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/blas_win64_MT.dll
+        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/lapack_win64_MT.dll
+    }
+
+    INSTALLS += blaslapack
+
+}
