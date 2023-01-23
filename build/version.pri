@@ -1,6 +1,6 @@
 
 # get git version
-git_command = "git --git-dir \"$$PWD/../.git\" --work-tree \"$$PWD\" describe --always --tags"
+git_command = "git --git-dir ../.git describe --always --tags"
 GIT_VERSION = $$system($$git_command)
 message($$git_command)
 
