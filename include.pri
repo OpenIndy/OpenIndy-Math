@@ -1,17 +1,3 @@
-
-# include paths
-INCLUDEPATH += $$PWD/include
-win32:CONFIG(release, debug|release): INCLUDEPATH += -L$$PWD/bin/release
-else:win32:CONFIG(debug, debug|release): INCLUDEPATH += -L$$PWD/bin/debug
-else:linux: CONFIG(debug, debug|release): INCLUDEPATH += -L$$PWD/bin/debug
-else:linux: CONFIG(release, debug|release): INCLUDEPATH += -L$$PWD/bin/release
-
-# depend paths
-win32:CONFIG(release, debug|release): DEPENDPATH += -L$$PWD/bin/release
-else:win32:CONFIG(debug, debug|release): DEPENDPATH += -L$$PWD/bin/debug
-else:linux: CONFIG(debug, debug|release): DEPENDPATH += -L$$PWD/bin/debug
-else:linux: CONFIG(release, debug|release): DEPENDPATH += -L$$PWD/bin/release
-
 # header files
 HEADERS  += \
     $$PWD/include/chooselalib.h \
