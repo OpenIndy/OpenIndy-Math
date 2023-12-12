@@ -161,9 +161,11 @@ bool LAArmadillo::invert(OiMat &result, const OiMat &m){
     try{
         this->arma2OiMat(result, arma::inv(ma)); //try to calc the standard inverse
     }catch(const runtime_error &e1){
+        std::cerr << e1.what();
         try{
             this->arma2OiMat(result, arma::pinv(ma));
         }catch(const runtime_error &e2){
+            std::cerr << e2.what();
             return false;
         }
     }
@@ -280,6 +282,7 @@ bool LAArmadillo::solve(OiVec &x, const OiMat &A, const OiVec &b){
         this->arma2OiVec(x, xa);
         return true;
     }catch(const runtime_error &e){
+        std::cerr << e.what();
         return false;
     }
 }
@@ -305,6 +308,7 @@ bool LAArmadillo::solve(OiMat &X, const OiMat &A, const OiMat &B){
         this->arma2OiMat(X, Xa);
         return true;
     }catch(const runtime_error &e){
+        std::cerr << e.what();
         return false;
     }
 }
@@ -326,8 +330,8 @@ void LAArmadillo::oiVec2Arma(arma::vec &result, const OiVec &v){
  * \param m
  */
 void LAArmadillo::oiMat2Arma(arma::mat &result, const OiMat &m){
-    for(int row = 0; row < m.getRowCount(); row++){
-        for(int col = 0; col < m.getColCount(); col++){
+    for(unsigned int row = 0; row < m.getRowCount(); row++){
+        for(unsigned int col = 0; col < m.getColCount(); col++){
             result.at(row, col) = m.getAt(row, col);
         }
     }
@@ -339,7 +343,7 @@ void LAArmadillo::oiMat2Arma(arma::mat &result, const OiMat &m){
  * \param v
  */
 void LAArmadillo::arma2OiVec(OiVec &result, const arma::vec &v){
-    for(int i = 0; i < v.n_rows; i++){
+    for(unsigned int i = 0; i < v.n_rows; i++){
         result.setAt(i, v[i]);
     }
 }
@@ -350,8 +354,8 @@ void LAArmadillo::arma2OiVec(OiVec &result, const arma::vec &v){
  * \param m
  */
 void LAArmadillo::arma2OiMat(OiMat &result, const arma::mat &m){
-    for(int i = 0; i < m.n_rows; i++){
-        for(int j = 0; j < m.n_cols; j++){
+    for(unsigned int i = 0; i < m.n_rows; i++){
+        for(unsigned int j = 0; j < m.n_cols; j++){
             result.setAt(i, j, m.at(i, j));
         }
     }
