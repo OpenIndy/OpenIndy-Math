@@ -4,14 +4,6 @@
 #----------------------------Specific Includes for linux---------------------------------
 
 linux {
-    # include paths
-    #INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/include
-
-    # header files
-   # HEADERS  += $$PWD/../lib/armadillo-3.910.0/include/armadillo
-
-    #LIBS += -L/usr/lib -lblas
-    #LIBS += -L/usr/lib -llapack
     LIBS += -L/usr/lib -larmadillo
 }
 
@@ -24,59 +16,21 @@ linux {
 #----------------------------Specific Includes for windows---------------------------------
 
 win32 {
+    ARMADILLO=armadillo-3.910.0
+
     # include paths
-    INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/include
+    INCLUDEPATH += $$PWD/../lib/$$ARMADILLO/include
 
-    # header files
-    HEADERS  += $$PWD/../lib/armadillo-3.910.0/include/armadillo
-    !contains(QMAKE_HOST.arch, x86_64) {
+    # link
+    LIBS += -L$$PWD/../lib/$$ARMADILLO/examples/lib_win64/ -lblas_win64_MT
+    LIBS += -L$$PWD/../lib/$$ARMADILLO/examples/lib_win64/ -llapack_win64_MT
 
-        message("x86 build")
+    # install
+    CONFIG(release, debug|release): blaslapack.path = $$PWD/../install/release
+    CONFIG(debug, debug|release): blaslapack.path = $$PWD/../install/debug
 
-        ## Windows x86 (32bit) specific build here
-
-LIBS += -L$$PWD/../lib/armadillo-3.910.0/examples/lib_win32/ -lblas_win32_MT
-
-INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32
-DEPENDPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32
-
-LIBS += -L$$PWD/../lib/armadillo-3.910.0/examples/lib_win32/ -llapack_win32_MT
-
-INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32
-DEPENDPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32
-
-    } else {
-
-        ## Windows x64 (64bit) specific build here
-
-        message("x86_64 build")
-
-LIBS += -L$$PWD/../lib/armadillo-3.910.0/examples/lib_win64/ -lblas_win64_MT
-
-INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64
-DEPENDPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64
-
-LIBS += -L$$PWD/../lib/armadillo-3.910.0/examples/lib_win64/ -llapack_win64_MT
-
-INCLUDEPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64
-DEPENDPATH += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64
-
-    }
-
-}
-
-win32 {
-
-    win32:CONFIG(release, debug|release): blaslapack.path = $$PWD/../install/release
-    win32:CONFIG(debug, debug|release): blaslapack.path = $$PWD/../install/debug
-
-    !contains(QT_ARCH, x86_64) {
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/blas_win32_MT.dll
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/lapack_win32_MT.dll
-    } else {
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/blas_win64_MT.dll
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/lapack_win64_MT.dll
-    }
+    blaslapack.files += $$PWD/../lib/$$ARMADILLO/examples/lib_win64/blas_win64_MT.dll
+    blaslapack.files += $$PWD/../lib/$$ARMADILLO/examples/lib_win64/lapack_win64_MT.dll
 
     INSTALLS += blaslapack
 
@@ -102,21 +56,3 @@ linux {
     INSTALLS += librarytarget
 }
 
-
-# blas / lapack
-win32 {
-
-    win32:CONFIG(release, debug|release): blaslapack.path = $$PWD/../install/release
-    win32:CONFIG(debug, debug|release): blaslapack.path = $$PWD/../install/debug
-
-    !contains(QT_ARCH, x86_64) {
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/blas_win32_MT.dll
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win32/lapack_win32_MT.dll
-    } else {
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/blas_win64_MT.dll
-        blaslapack.files += $$PWD/../lib/armadillo-3.910.0/examples/lib_win64/lapack_win64_MT.dll
-    }
-
-    INSTALLS += blaslapack
-
-}
