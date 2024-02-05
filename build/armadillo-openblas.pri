@@ -1,6 +1,7 @@
 # https://arma.sourceforge.net/faq.html#linking
 win32 {
     ARMADILLO=armadillo-12.6.7
+
     # include paths
     INCLUDEPATH += $$PWD/../lib/$$ARMADILLO/include
 

@@ -21,3 +21,4 @@ win32 {
 
 linux {
     LIBS += -L/usr/lib -larmadillo
+}
