@@ -1,4 +1,5 @@
 CONFIG += c++11
+QMAKE_CXXFLAGS_GNUCXX1Z          = -std=gnu++11
 
 TEMPLATE = subdirs
 
